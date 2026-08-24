@@ -1,4 +1,6 @@
 using FluentValidation;
+using JobTracker.Modules.Jobs.Application.Behaviors;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace JobTracker.Modules.Jobs.Application;
@@ -12,10 +14,14 @@ public static class DependencyInjection
         {
             configuration.RegisterServicesFromAssembly(
                 typeof(DependencyInjection).Assembly);
+
+            configuration.AddOpenBehavior(
+                typeof(ValidationBehavior<,>));
         });
 
         services.AddValidatorsFromAssembly(
-            typeof(DependencyInjection).Assembly);
+            typeof(DependencyInjection).Assembly,
+            includeInternalTypes: true);
 
         return services;
     }
