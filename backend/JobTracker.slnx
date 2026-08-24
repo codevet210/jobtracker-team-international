@@ -6,11 +6,21 @@
     <Project Path="src/BuildingBlocks/JobTracker.SharedKernel/JobTracker.SharedKernel.csproj" />
   </Folder>
   <Folder Name="/src/Modules/" />
+  <Folder Name="/src/Modules/Billing/">
+    <Project Path="src/Modules/Billing/JobTracker.Modules.Billing/JobTracker.Modules.Billing.csproj" />
+  </Folder>
   <Folder Name="/src/Modules/Jobs/">
     <Project Path="src/Modules/Jobs/JobTracker.Modules.Jobs.Application/JobTracker.Modules.Jobs.Application.csproj" />
     <Project Path="src/Modules/Jobs/JobTracker.Modules.Jobs.Domain/JobTracker.Modules.Jobs.Domain.csproj" />
     <Project Path="src/Modules/Jobs/JobTracker.Modules.Jobs.Infrastructure/JobTracker.Modules.Jobs.Infrastructure.csproj" />
     <Project Path="src/Modules/Jobs/JobTracker.Modules.Jobs.IntegrationEvents/JobTracker.Modules.Jobs.IntegrationEvents.csproj" />
     <Project Path="src/Modules/Jobs/JobTracker.Modules.Jobs.Presentation/JobTracker.Modules.Jobs.Presentation.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Notifications/">
+    <Project Path="src/Modules/Notifications/JobTracker.Modules.Notifications/JobTracker.Modules.Notifications.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/JobTracker.ArchitectureTests/JobTracker.ArchitectureTests.csproj" />
+    <Project Path="tests/JobTracker.UnitTests/JobTracker.UnitTests.csproj" />
   </Folder>
 </Solution>
