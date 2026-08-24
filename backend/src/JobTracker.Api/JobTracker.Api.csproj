@@ -7,11 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Hangfire.AspNetCore" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+    <PackageReference Include="Newtonsoft.Json" />
+    <PackageReference Include="Npgsql" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Modules\Billing\JobTracker.Modules.Billing\JobTracker.Modules.Billing.csproj" />
     <ProjectReference Include="..\Modules\Jobs\JobTracker.Modules.Jobs.Infrastructure\JobTracker.Modules.Jobs.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\Jobs\JobTracker.Modules.Jobs.Presentation\JobTracker.Modules.Jobs.Presentation.csproj" />
+    <ProjectReference Include="..\Modules\Notifications\JobTracker.Modules.Notifications\JobTracker.Modules.Notifications.csproj" />
   </ItemGroup>
 
 </Project>
