@@ -15,7 +15,10 @@ export function useJobsPage(initialJobs: JobDto[]) {
 
   useEffect(() => {
     hydrate(initialJobs);
-  }, [hydrate, initialJobs]);
+    // Hydrate once from the server payload. Re-running on each new array
+    // identity would loop with the filtered-jobs selector.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hydrate]);
 
   const createJob = useCreateJob(() => {
     window.location.reload();

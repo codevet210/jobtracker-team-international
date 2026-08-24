@@ -109,13 +109,14 @@ export const useJobsStore = create<JobsUiState>((set) => ({
     })),
 }));
 
-export const useFilteredJobs = () => useJobsStore(selectFilteredJobs);
+const selectJobFilters = (state: JobsUiState) => ({
+  filters: state.filters,
+  setSearch: state.setSearch,
+  setStatuses: state.setStatuses,
+});
+
+export const useFilteredJobs = () =>
+  useJobsStore(useShallow(selectFilteredJobs));
 
 export const useJobFilters = () =>
-  useJobsStore(
-    useShallow((state) => ({
-      filters: state.filters,
-      setSearch: state.setSearch,
-      setStatuses: state.setStatuses,
-    })),
-  );
+  useJobsStore(useShallow(selectJobFilters));
