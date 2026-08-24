@@ -11,4 +11,8 @@ public interface IJobRepository
     Task AddAsync(
         Job job,
         CancellationToken cancellationToken = default);
+
+    Task<(IReadOnlyList<Job> Items, int TotalCount)> SearchAsync(
+        JobSearchCriteria criteria,
+        CancellationToken cancellationToken = default);
 }

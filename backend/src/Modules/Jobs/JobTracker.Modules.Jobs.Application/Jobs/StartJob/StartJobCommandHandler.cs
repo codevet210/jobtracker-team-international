@@ -3,15 +3,15 @@ using JobTracker.Modules.Jobs.Domain.Repositories;
 using JobTracker.SharedKernel.Application;
 using MediatR;
 
-namespace JobTracker.Modules.Jobs.Application.Jobs.CompleteJob;
+namespace JobTracker.Modules.Jobs.Application.Jobs.StartJob;
 
-internal sealed class CompleteJobCommandHandler
-    : IRequestHandler<CompleteJobCommand, Result<Unit>>
+internal sealed class StartJobCommandHandler
+    : IRequestHandler<StartJobCommand, Result<Unit>>
 {
     private readonly IJobRepository _jobRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public CompleteJobCommandHandler(
+    public StartJobCommandHandler(
         IJobRepository jobRepository,
         IUnitOfWork unitOfWork)
     {
@@ -20,7 +20,7 @@ internal sealed class CompleteJobCommandHandler
     }
 
     public async Task<Result<Unit>> Handle(
-        CompleteJobCommand command,
+        StartJobCommand command,
         CancellationToken cancellationToken)
     {
         var job = await _jobRepository.GetByIdAsync(
@@ -35,7 +35,7 @@ internal sealed class CompleteJobCommandHandler
 
         try
         {
-            job.Complete(command.CompletedAt);
+            job.Start(command.StartedAt);
         }
         catch (InvalidOperationException exception)
         {
@@ -43,8 +43,7 @@ internal sealed class CompleteJobCommandHandler
                 JobErrors.InvalidTransition(exception.Message));
         }
 
-        await _unitOfWork.SaveChangesAsync(
-            cancellationToken);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         return Result<Unit>.Success(Unit.Value);
     }

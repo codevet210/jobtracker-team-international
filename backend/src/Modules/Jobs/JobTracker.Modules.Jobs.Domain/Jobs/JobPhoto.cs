@@ -4,6 +4,11 @@ namespace JobTracker.Modules.Jobs.Domain.Jobs;
 
 public sealed class JobPhoto : Entity
 {
+    private JobPhoto()
+        : base(Guid.Empty)
+    {
+    }
+
     private JobPhoto(Guid id)
         : base(id)
     {

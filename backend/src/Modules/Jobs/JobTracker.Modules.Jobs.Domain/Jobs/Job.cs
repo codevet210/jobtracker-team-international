@@ -7,6 +7,11 @@ public sealed class Job : AggregateRoot
 {
     private readonly List<JobPhoto> _photos = [];
 
+    private Job()
+        : base(Guid.Empty)
+    {
+    }
+
     private Job(Guid id)
         : base(id)
     {
@@ -29,7 +34,9 @@ public sealed class Job : AggregateRoot
             Address = address,
             CustomerId = customerId,
             OrganizationId = organizationId,
-            Status = JobStatus.Draft
+            Status = JobStatus.Draft,
+            CreatedAt = DateTimeOffset.UtcNow,
+            UpdatedAt = DateTimeOffset.UtcNow
         };
 
         job.RaiseDomainEvent(
@@ -59,6 +66,7 @@ public sealed class Job : AggregateRoot
         ScheduledDate = scheduledDate;
         AssigneeId = assigneeId;
         Status = JobStatus.Scheduled;
+        Touch();
     }
 
     public void Start(DateTimeOffset startedAt)
@@ -71,6 +79,7 @@ public sealed class Job : AggregateRoot
 
         StartedAt = startedAt;
         Status = JobStatus.InProgress;
+        Touch();
     }
 
     public void AddPhoto(
@@ -90,6 +99,7 @@ public sealed class Job : AggregateRoot
             caption);
 
         _photos.Add(photo);
+        Touch();
     }
 
     public void Complete(
@@ -103,6 +113,7 @@ public sealed class Job : AggregateRoot
 
         Status = JobStatus.Completed;
         CompletedAt = completedAt;
+        Touch();
 
         RaiseDomainEvent(
             new JobCompletedDomainEvent(
@@ -123,6 +134,7 @@ public sealed class Job : AggregateRoot
         ArgumentException.ThrowIfNullOrWhiteSpace(reason);
 
         Status = JobStatus.Cancelled;
+        Touch();
 
         RaiseDomainEvent(
             new JobCancelledDomainEvent(
@@ -151,6 +163,15 @@ public sealed class Job : AggregateRoot
 
     public DateTimeOffset? CompletedAt { get; private set; }
 
+    public DateTimeOffset CreatedAt { get; private set; }
+
+    public DateTimeOffset UpdatedAt { get; private set; }
+
     public IReadOnlyCollection<JobPhoto> Photos =>
         _photos.AsReadOnly();
+
+    private void Touch()
+    {
+        UpdatedAt = DateTimeOffset.UtcNow;
+    }
 }

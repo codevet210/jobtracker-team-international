@@ -8,4 +8,7 @@ public static class JobErrors
         new(
             "Jobs.NotFound",
             $"The job with ID '{jobId}' was not found.");
+
+    public static Error InvalidTransition(string message) =>
+        new("Jobs.InvalidTransition", message);
 }
