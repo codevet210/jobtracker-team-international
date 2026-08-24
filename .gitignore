@@ -1,0 +1,111 @@
+# ============================================
+# .NET
+# ============================================
+
+# Build results
+**/bin/
+**/obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+*.sln.iml
+
+# VS Code
+.vscode/
+
+# Test results
+TestResults/
+**/TestResults/
+*.trx
+coverage/
+coverage.*
+*.coverage
+*.coveragexml
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
+# Publish output
+publish/
+**/publish/
+
+
+# ============================================
+# Next.js / Node.js
+# ============================================
+
+node_modules/
+**/node_modules/
+
+.next/
+**/.next/
+
+out/
+dist/
+
+# Package manager caches
+.npm/
+.yarn/
+.pnpm-store/
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+
+# ============================================
+# Environment / Secrets
+# ============================================
+
+.env
+.env.*
+!.env.example
+
+# Local .NET configuration with secrets
+appsettings.Development.local.json
+appsettings.Local.json
+
+# User secrets
+secrets.json
+
+
+# ============================================
+# OS
+# ============================================
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+
+# ============================================
+# Temporary files
+# ============================================
+
+*.tmp
+*.temp
+*.log
+*.bak
+*.swp
+*.swo
+
+# ============================================
+# Docker
+# ============================================
+
+docker-compose.override.yml
