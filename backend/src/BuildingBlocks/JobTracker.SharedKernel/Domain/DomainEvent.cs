@@ -1,6 +1,6 @@
 namespace JobTracker.SharedKernel.Domain;
 
-public abstract class DomainEvent : IDomainEvent
+public abstract record DomainEvent : IDomainEvent
 {
     public Guid Id { get; }
     public DateTimeOffset OccurredOnUtc { get; }
