@@ -21,11 +21,13 @@ export type Pagination = {
 
 type JobsUiState = {
   jobs: JobDto[];
+  highlightedJobId: string | null;
   selectedJobIds: string[];
   filters: JobFilters;
   pagination: Pagination;
   sortConfig: SortConfig;
   hydrate: (jobs: JobDto[]) => void;
+  setHighlightedJobId: (jobId: string | null) => void;
   setSearch: (search: string) => void;
   setStatuses: (statuses: JobStatus[]) => void;
   toggleSelected: (jobId: string) => void;
@@ -64,11 +66,13 @@ const selectFilteredJobs = (state: JobsUiState): JobDto[] => {
 
 export const useJobsStore = create<JobsUiState>((set) => ({
   jobs: [],
+  highlightedJobId: null,
   selectedJobIds: [],
   filters: { statuses: [], search: "" },
   pagination: { page: 1, pageSize: 20 },
   sortConfig: { field: "createdAt", direction: "desc" },
   hydrate: (jobs) => set({ jobs }),
+  setHighlightedJobId: (jobId) => set({ highlightedJobId: jobId }),
   setSearch: (search) =>
     set((state) => ({
       filters: { ...state.filters, search },
